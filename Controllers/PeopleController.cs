@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GitTalk.Controllers
 {
@@ -11,11 +13,6 @@ namespace GitTalk.Controllers
     [Route("[controller]")]
     public class PeopleController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<PeopleController> _logger;
 
         public PeopleController(ILogger<PeopleController> logger)
@@ -29,7 +26,8 @@ namespace GitTalk.Controllers
             var rng = new Random();
             var uuid = Guid.NewGuid().ToString();
             var shortUuid = uuid.Split("-").Last().ToString();
-            return Enumerable.Range(1, 5).Select(index => new Person
+
+            var result = Enumerable.Range(1, 5).Select(index => new Person
             {
                 ID = uuid,
                 FirstName = $"{shortUuid}_FirstName",
@@ -37,6 +35,10 @@ namespace GitTalk.Controllers
                 Age= rng.Next(),
                 Token = Guid.NewGuid().ToString()
             }).ToArray();
+
+            _logger.Log(LogLevel.Information, $"Returned people: \n{JsonSerializer.Serialize(result)}\n");
+
+            return result;
         }
     }
 }
