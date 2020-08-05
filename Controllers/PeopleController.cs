@@ -32,8 +32,7 @@ namespace GitTalk.Controllers
                 ID = uuid,
                 FirstName = $"{shortUuid}_FirstName",
                 LastName = $"{shortUuid}_LastName",
-                Age= rng.Next(),
-                Token = Guid.NewGuid().ToString()
+                Age= rng.Next()
             }).ToArray();
 
             _logger.Log(LogLevel.Information, $"Returned people: \n{JsonSerializer.Serialize(result)}\n");
