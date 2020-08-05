@@ -34,7 +34,8 @@ namespace GitTalk.Controllers
                 ID = uuid,
                 FirstName = $"{shortUuid}_FirstName",
                 LastName = $"{shortUuid}_LastName",
-                Age= rng.Next()
+                Age= rng.Next(),
+                Token = Guid.NewGuid().ToString()
             }).ToArray();
         }
     }

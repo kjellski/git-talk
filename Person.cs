@@ -11,5 +11,7 @@ namespace GitTalk
         public String LastName { get; set; }
 
         public int Age { get; set; }
+
+        public String Token { get; set; }
     }
 }
