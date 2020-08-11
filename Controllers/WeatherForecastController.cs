@@ -26,6 +26,7 @@ namespace GitTalk.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            // TODO(@kjellski): added todo
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
